@@ -1,13 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import Map from './components/Map/Map'
+
 import reportWebVitals from './reportWebVitals';
+import Navbar from './components/Navbar';
+import {BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import About from './pages/About';
+import Instructions from './pages/Instructions';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <Navbar />
+      <Routes >
+        <Route path="" element={<Map />} />
+        <Route path="about" element={<About />} />
+        <Route path="instructions" element={<Instructions />} />
+      </Routes>
+    </Router>
+    {/* <Map /> */}
+    {/* <Test /> */}
   </React.StrictMode>
 );
 

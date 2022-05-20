@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@500;700&display=swap');
+
+*{
+  font-family: 'Ubuntu', sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.leaflet-container{
+    position: absolute;
+    width: 100%;
+    height: 87vh;
+    /* outline: 1px solid black; */
+    bottom: 0;
+  }
