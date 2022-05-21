@@ -10,28 +10,6 @@ const Navbar = () => {
           <h1>Ruta Unknown</h1>
         </NavLink>
         <Burger />
-        {/* <MobileNav /> */}
-        {/* <NavMenu>
-          <Exit />
-          <NavLink to="/about" >
-            about
-          </NavLink>
-          <NavLink 
-            to="//github.com"
-            target="_blank"
-          >
-            contribute
-          </NavLink>
-            <NavLink 
-              to= "//www.reddit.com/r/solotravel/wiki/index"
-              target="_blank"  
-            >
-              travel
-            </NavLink>
-        </NavMenu> */}
-        {/* <NavBtn>
-          <NavBtnLink to="/instructions">Instructions</NavBtnLink>
-        </NavBtn> */}
       </Nav>
     </>
   )
