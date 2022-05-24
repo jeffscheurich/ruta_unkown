@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "paths": {
+    "/pins": {
+      "name": "/pins",
+      "lambdaFunction": "pinsfunction",
+      "permissions": {
+        "setting": "protected",
+        "auth": [
+          "create",
+          "read",
+          "update"
+        ],
+        "guest": [
+          "create",
+          "read",
+          "update"
+        ]
+      }
+    }
+  }
+}

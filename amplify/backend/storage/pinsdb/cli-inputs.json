@@ -1,0 +1,10 @@
+{
+  "resourceName": "pinsdb",
+  "tableName": "pinsdb",
+  "partitionKey": {
+    "fieldName": "Id",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}

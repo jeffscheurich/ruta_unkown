@@ -1,12 +1,15 @@
-import React from 'react'
-import { Nav, NavLink, NavMenu, NavBtn, NavBtnLink, Exit } from './NavbarElements'
+import React, { useEffect } from 'react'
+import { Nav, NavLink } from './NavbarElements'
 import Burger from './NavbarElements'
-// import MobileNav  from './MobileNav'
+import { run } from '../../functions/AwsFunctions'
+import Amplify, {API} from 'aws-amplify'
+
 const Navbar = () => {
   return (
     <>
       <Nav>
-        <NavLink to="/">
+        {/* <NavLink to="/" onClick={() => fetchDataFormDynamoDb()}> */}
+        <NavLink to="/" onClick={() => run()}>
           <h1>Ruta Unknown</h1>
         </NavLink>
         <Burger />
