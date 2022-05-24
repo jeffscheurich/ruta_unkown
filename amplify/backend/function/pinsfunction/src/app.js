@@ -79,7 +79,6 @@ app.get(path + hashKeyPath, function(req, res) {
   let queryParams = {
     TableName: tableName,
     KeyConditions: condition,
-    ProjectionExpression: "Id, Location"
   }
 
   dynamodb.scan(queryParams, (err, data) => {
