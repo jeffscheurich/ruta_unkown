@@ -124,56 +124,62 @@ export const Exit = styled(FaTimes)`
   }
 `;
 
-const Burger = () => {
+const Navbar = (props) => {
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      <Bars 
-        open={open} 
-        onClick={() => setOpen(!open)} 
-      />
-      <NavMenu open={open}>
-        <Exit 
-          open={open}
-          onClick={() => setOpen(!open)}
+      <Nav>
+        <NavLink to="/">
+          <h1>Ruta Unknown</h1>
+        </NavLink>
+        <Bars 
+          open={open} 
+          onClick={() => setOpen(!open)} 
         />
-        <NavLink 
-          to="/about" 
-          open={open} 
-          onClick={() => setOpen(!open)}
-        >
+        <NavMenu open={open}>
+          <Exit 
+            open={open}
+            onClick={() => setOpen(!open)}
+          />
+          <NavLink 
+            to="/about" 
+            open={open} 
+            onClick={() => setOpen(!open)}
+          >
           about
-        </NavLink>
-        <NavLink 
-          open={open} 
-          onClick={() => setOpen(!open)}
-          to="//github.com"
-          target="_blank"
-        >
+          </NavLink>
+          <NavLink 
+            open={open} 
+            onClick={() => setOpen(!open)}
+            to="//github.com"
+            target="_blank"
+          >
           contribute
-        </NavLink>
-        <NavLink 
-          open={open} 
-          onClick={() => setOpen(!open)}
-          to= "//www.reddit.com/r/solotravel/wiki/index"
-          target="_blank"  
-        >
+          </NavLink>
+          <NavLink 
+            open={open} 
+            onClick={() => setOpen(!open)}
+            to= "//www.reddit.com/r/solotravel/wiki/index"
+            target="_blank"  
+          >
           travel
-        </NavLink>
-      </NavMenu>
-      <NavBtn
-        open={open} 
-        onClick={() => setOpen(!open)}
-      >
-        <NavBtnLink
+          </NavLink>
+        </NavMenu>
+        <NavBtn
+          open={open} 
+          draggable = {props.draggable}
+          onClick={() => setOpen(!open)}
         >
-          Instructions
-        </NavBtnLink>
-      </NavBtn>
+          <NavBtnLink
+          >
+          New Pin
+          </NavBtnLink>
+        </NavBtn>
+      </Nav>
     </>
     
   );
 };
 
-export default Burger;
+export default Navbar;

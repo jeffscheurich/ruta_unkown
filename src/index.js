@@ -1,11 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import Map from "./components/Map";
+import App from "./components/Map";
 import reportWebVitals from "./reportWebVitals";
-import Navbar from "./components/Navbar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import About from "./pages/About";
-import Instructions from "./pages/Instructions";
 import awsExports from "./aws-exports";
 import Amplify from "aws-amplify";
 
@@ -15,13 +13,11 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Router>
-      {/* <Navbar /> */}
-      <Map />
+      <App />
       <Routes >
-        {/* <Route path="/" element={<Map />} /> */}
+        {/* Must add null element to prevent app from being rendered twice */}
+        <Route path="/" element={null}/>
         <Route path="about" element={<About />} />
-        {/* <Route path="instructions" element={<Instructions />} /> */}
-        {/* <Route path="instructions" element={<Map />} /> */}
       </Routes>
     </Router>
   </React.StrictMode>

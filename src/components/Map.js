@@ -1,15 +1,16 @@
 import React, { useEffect } from "react";
 import { MapContainer, Marker, TileLayer } from "react-leaflet";
-import "./Map.css";
+import "./styles/Map.css";
 import { API } from "aws-amplify";
-import DetailDisplay from "./MapElements";
-import Navbar from "../Navbar";
+import DetailDisplay from "./DetailDisplay";
+import Navbar from "./Navbar";
 
-const Map = () => {
+const App = () => {
   const [pins, setPins] = React.useState([]);
   const [currentPin, setCurrentPin] = React.useState({});
-  const [open, setOpen] = React.useState(false);
+  const [detailOpen, setDetailOpen] = React.useState(false);
   const [draggable, setDraggable] = React.useState(false);
+  const [newPinOpen, setNewPinOpen] = React.useState(false);
 
   useEffect(() => {
     API.get("pinsapi", "/pins/Id")
@@ -30,18 +31,20 @@ const Map = () => {
       ...selectedPin
     };
     setCurrentPin(pinCopy);
-    setOpen(true);
+    setDetailOpen(true);
   };
 
   const conditionalClose = (open) => {
     if (open) {
-      setOpen(false);
+      setDetailOpen(false);
     }
   };
 
   return (
     <>
-      <Navbar />
+      <Navbar 
+        draggable={draggable}
+      />
       <MapContainer
         center={[0, 0]}
         zoom={2.5}
@@ -66,7 +69,7 @@ const Map = () => {
         ))}
       </MapContainer>
       <DetailDisplay
-        open={open}
+        open={detailOpen}
         currentPin={currentPin}
         onClick={() => {conditionalClose(open);}}
         draggable={draggable}
@@ -76,4 +79,4 @@ const Map = () => {
   );
 };
 
-export default Map;
+export default App;
