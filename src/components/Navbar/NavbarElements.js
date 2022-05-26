@@ -1,7 +1,7 @@
-import styled from 'styled-components';
-import { NavLink as Link } from 'react-router-dom';
-import { FaBars, FaTimes } from 'react-icons/fa';
-import React, { useState } from 'react';
+import styled from "styled-components";
+import { NavLink as Link } from "react-router-dom";
+import { FaBars, FaTimes } from "react-icons/fa";
+import React, { useState } from "react";
 
 
 export const Nav = styled.nav`
@@ -12,6 +12,7 @@ export const Nav = styled.nav`
   align-items: center;
   padding: 0.5rem calc((100vw - 1000px) / 2);
   z-index: 10;
+  border-bottom: 1px solid #82ff82;
 `;
 
 export const NavLink = styled(Link)`
@@ -51,7 +52,7 @@ export const NavMenu = styled.div`
   align-items: center;
   margin-right: -24px;
   @media screen and (max-width: 768px) {
-    display: ${({open}) => open ? 'flex' : 'none'};
+    display: ${({ open }) => open ? "flex" : "none"};
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
@@ -73,7 +74,7 @@ export const NavBtn = styled.nav`
   @media screen and (max-width: 768px) {
     // display: none;
     z-index: 99999;
-    display: ${({open}) => open ? 'flex' : 'none'};
+    display: ${({ open }) => open ? "flex" : "none"};
     position: absolute;
     top: 80%;
     right: 0;
@@ -84,7 +85,7 @@ export const NavBtn = styled.nav`
   }
 `;
 
-export const NavBtnLink = styled(Link)`
+export const NavBtnLink = styled.p`
   border-radius: 4px;
   background: #82ff82;
   padding: 10px 22px;
@@ -94,7 +95,6 @@ export const NavBtnLink = styled(Link)`
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   text-decoration: none;
-  }
 `;
 
 const Bars = styled(FaBars)`
@@ -166,15 +166,14 @@ const Burger = () => {
         open={open} 
         onClick={() => setOpen(!open)}
       >
-        <NavBtnLink 
-          to="/instructions"
+        <NavBtnLink
         >
           Instructions
         </NavBtnLink>
       </NavBtn>
     </>
     
-  )
+  );
 };
 
-export default Burger
+export default Burger;

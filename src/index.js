@@ -1,37 +1,27 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import Map from './components/Map/Map'
-import reportWebVitals from './reportWebVitals';
-import Navbar from './components/Navbar';
-import {BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import About from './pages/About';
-import Instructions from './pages/Instructions';
-import awsExports from './aws-exports';
-import Amplify, {API} from 'aws-amplify'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import Map from "./components/Map";
+import reportWebVitals from "./reportWebVitals";
+import Navbar from "./components/Navbar";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import About from "./pages/About";
+import Instructions from "./pages/Instructions";
+import awsExports from "./aws-exports";
+import Amplify from "aws-amplify";
 
 Amplify.configure(awsExports);
 
-// import * as AWS from 'aws-sdk';
-// import { ConfigurationOptions } from 'aws-sdk'
-
-
-// const configuration = {
-//   region: "us-west-1",
-//   secretAccessKey: process.env.REACT_APP_AWS_SECRET_KEY,
-//   accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY,
-// };
-
-// AWS.config.update(configuration)
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Router>
-      <Navbar />
+      {/* <Navbar /> */}
+      <Map />
       <Routes >
-        <Route path="" element={<Map />} />
+        {/* <Route path="/" element={<Map />} /> */}
         <Route path="about" element={<About />} />
-        <Route path="instructions" element={<Instructions />} />
+        {/* <Route path="instructions" element={<Instructions />} /> */}
+        {/* <Route path="instructions" element={<Map />} /> */}
       </Routes>
     </Router>
   </React.StrictMode>
