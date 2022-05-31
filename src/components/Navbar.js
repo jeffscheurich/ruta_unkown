@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import styled from "styled-components";
 import { NavLink as Link } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
@@ -66,26 +67,43 @@ export const NavMenu = styled.div`
   }
 `;
 
+export const NavBtnContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  @media screen and (max-width: 768px) {
+   z-index: 9999;
+   justify-content: center;
+   align-itesm: center;
+   width: 100%;
+   position: absolute;
+   top: 80%;
+   left: 0; 
+   display: ${({ open }) => open ? "flex" : "none"};
+  }
+`;
+
 export const NavBtn = styled.nav`
   display: flex;
-  // display: none;
   align-items: center;
   margin-right: 24px;
   @media screen and (max-width: 768px) {
-    // display: none;
+    margin: 10px;
     z-index: 99999;
-    display: ${({ open }) => open ? "flex" : "none"};
-    position: absolute;
-    top: 80%;
-    right: 0;
-    left: 0;
-    margin-left: auto;
-    margin-right: auto;
-    width: 132px;
   }
 `;
 
 export const NavBtnLink = styled.p`
+  border-radius: 4px;
+  background: ${({ props }) => props.draggable ? "#000" : "#82ff82"};
+  padding: 10px 22px;
+  color: ${({ props }) => props.draggable ? "#82ff82" : "#000"};
+  outline: none;
+  border: ${({ props }) => props.draggable ? "1px solid #82ff82" : "none"};
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  text-decoration: none;
+`;
+export const NavBtnLinkNewPin = styled.p`
   border-radius: 4px;
   background: #82ff82;
   padding: 10px 22px;
@@ -95,9 +113,10 @@ export const NavBtnLink = styled.p`
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   text-decoration: none;
+  box-shadow: 0 0 15px #82ff82;
 `;
 
-const Bars = styled(FaBars)`
+export const Bars = styled(FaBars)`
   display: none;
   color: #fff;
   
@@ -166,16 +185,43 @@ const Navbar = (props) => {
           travel
           </NavLink>
         </NavMenu>
-        <NavBtn
-          open={open} 
-          draggable = {props.draggable}
-          onClick={() => setOpen(!open)}
+        <NavBtnContainer
+          open={open}
         >
-          <NavBtnLink
+          <NavBtn
+            open={open}
+            props={props}
+            onClick={() => {
+              setOpen(!open);
+              props.setDraggable(!props.draggable);
+              props.setNewPinOpen(false);
+            }}
           >
-          New Pin
-          </NavBtnLink>
-        </NavBtn>
+            <NavBtnLink props={props}
+            >
+              { props.draggable
+                ?
+                "Cancel"
+                :
+                "New Pin"
+              }
+            </NavBtnLink>
+          </NavBtn>
+          { props.draggable
+            ?
+            <NavBtn
+              props={props}
+              // onClick={() => props.setNewPinOpen(!props.newPinOpen)}
+              onClick={() => {props.setNewPinOpen(true);}}
+            >
+              <NavBtnLinkNewPin>
+              Add Details
+              </NavBtnLinkNewPin>
+            </NavBtn>
+            :
+            null
+          }
+        </NavBtnContainer>
       </Nav>
     </>
     
