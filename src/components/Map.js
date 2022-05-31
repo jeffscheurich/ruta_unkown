@@ -64,10 +64,8 @@ const App = () => {
     <>
       <Navbar 
         draggable={draggable}
-        // setDraggable = {() => {setDraggablePin(draggable);}}
         setDraggable={setDraggable}
         newPinOpen={newPinOpen}
-        // setNewPinOpen={() => {setNewPinOpen(newPinOpen);}}
         setNewPinOpen={setNewPinOpen}
       />
       <MapContainer
@@ -99,7 +97,7 @@ const App = () => {
             <>
               <Draggable
                 draggable={draggable} 
-                setCenterPos={() => { getCurrentCenter(map); }}
+                setCenterPos={() => {getCurrentCenter(map);}}
                 setNewPin={setNewPin}
                 newPin={newPin}
               />

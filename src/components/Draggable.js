@@ -10,7 +10,6 @@ export const StyledMarker = styled(Marker)`
 const Draggable = (props) => {
   useEffect((map) => {
     props.setCenterPos(map);
-    // console.log(`child use effect: ${[props.newPinPosition.lat, props.newPinPosition.lng]}`);
   }, []);
   const markerRef = useRef();
 
