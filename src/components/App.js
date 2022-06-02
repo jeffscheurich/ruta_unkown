@@ -51,12 +51,6 @@ const App = () => {
     setDetailOpen(true);
   };
 
-  const conditionalClose = (open) => {
-    if (open) {
-      setDetailOpen(false);
-    }
-  };
-
   const getCurrentCenter = (map) => {
     const newPinCopy = newPin;
     newPinCopy.Location.Latitude = map.getCenter().lat;
@@ -138,7 +132,7 @@ const App = () => {
       <DetailDisplay
         open={detailOpen}
         currentPin={currentPin}
-        onClick={() => {conditionalClose(open);}}
+        setDetailOpen={setDetailOpen}
         setNewCommentOpen={setNewCommentOpen}
         newCommentOpen={newCommentOpen}
       />

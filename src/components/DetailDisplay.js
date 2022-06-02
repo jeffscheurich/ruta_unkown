@@ -124,7 +124,10 @@ export const NextPost = styled(FaArrowRight)`
 const DetailDisplay = (props) => {
   return (
     <DetailContainer props={props} >
-      <Exit props={props} onClick ={props.onClick}/>
+      <Exit 
+        props={props}
+        onClick ={() => {props.setDetailOpen(false);}}
+      />
       <TitleContainer props={props}>
         <h1>{props.currentPin.Title}</h1>
         <p>{props.currentPin.Description}</p>
