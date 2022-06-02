@@ -138,20 +138,19 @@ const DetailDisplay = (props) => {
         </ul>
       </CommentsContainer>
       <NewButtonWrapper>
-        <NewButtonContainer>
+        <NewButtonContainer onClick={() => {props.setNewCommentOpen(true);}}>
           <NewComment />
-          <p>Comment</p>
+          <p>New Comment</p>
         </NewButtonContainer>
-        <NewButtonContainer>
+        {/* <NewButtonContainer>
           <NewPost />
           <p>New Post</p>
-        </NewButtonContainer>
+        </NewButtonContainer> */}
       </NewButtonWrapper>
-      <NextPostContainer>
+      {/* <NextPostContainer>
         <NextPost />
         <p>Next Post</p>
-      </NextPostContainer>
-      
+      </NextPostContainer> */}
     </DetailContainer>
   );
 };

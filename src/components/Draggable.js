@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { Marker, Tooltip } from "react-leaflet";
 import styled from "styled-components";
 
@@ -8,16 +8,14 @@ export const StyledMarker = styled(Marker)`
 `;
 
 const Draggable = (props) => {
-  useEffect((map) => {
-    props.setCenterPos(map);
-  }, []);
   const markerRef = useRef();
-
-
   const updatePosition = () => {
     const marker = markerRef.current;
     const newPinCopy = props.newPin;
-    newPinCopy.Location = marker._latlng;
+    console.log(marker._latlng);
+    newPinCopy.Location.Latitude = marker._latlng.lat;
+    newPinCopy.Location.Longitude = marker._latlng.lng;
+    console.log(newPinCopy);
     props.setNewPin(newPinCopy);
   };
 
@@ -26,7 +24,7 @@ const Draggable = (props) => {
       {props.newPin
         ?
         <StyledMarker   
-          position={props.newPin.Location}
+          position={[props.newPin.Location.Latitude, props.newPin.Location.Longitude]}
           draggable={props.draggable}
           ref={markerRef}
           eventHandlers={{

@@ -59,7 +59,7 @@ export const NavMenu = styled.div`
     align-items: center;
     width: 100vw;
     height: 100vh;
-    z-index: 9999;
+    z-index: 99999;
     background-color: #000;
     position: absolute;
     top: 0;
@@ -71,7 +71,7 @@ export const NavBtnContainer = styled.div`
   display: flex;
   flex-direction: row;
   @media screen and (max-width: 768px) {
-   z-index: 9999;
+   z-index: 99999;
    justify-content: center;
    align-itesm: center;
    width: 100%;
@@ -166,7 +166,7 @@ const Navbar = (props) => {
             open={open} 
             onClick={() => setOpen(!open)}
           >
-          about
+          About
           </NavLink>
           <NavLink 
             open={open} 
@@ -174,7 +174,7 @@ const Navbar = (props) => {
             to="//github.com"
             target="_blank"
           >
-          contribute
+          Contribute
           </NavLink>
           <NavLink 
             open={open} 
@@ -182,7 +182,7 @@ const Navbar = (props) => {
             to= "//www.reddit.com/r/solotravel/wiki/index"
             target="_blank"  
           >
-          travel
+          Travel
           </NavLink>
         </NavMenu>
         <NavBtnContainer
@@ -195,6 +195,7 @@ const Navbar = (props) => {
               setOpen(!open);
               props.setDraggable(!props.draggable);
               props.setNewPinOpen(false);
+              props.setCenterPos();
             }}
           >
             <NavBtnLink props={props}
@@ -211,8 +212,10 @@ const Navbar = (props) => {
             ?
             <NavBtn
               props={props}
-              // onClick={() => props.setNewPinOpen(!props.newPinOpen)}
-              onClick={() => {props.setNewPinOpen(true);}}
+              onClick={() => {
+                props.setNewPinOpen(true);
+                setOpen(!open);
+              }}
             >
               <NavBtnLinkNewPin>
               Add Details

@@ -6,6 +6,8 @@ import DetailDisplay from "./DetailDisplay";
 import Navbar from "./Navbar";
 import Draggable from "./Draggable";
 import NewPinDisplay from "./NewPinDisplay";
+import NewCommentDisplay from "./NewComment";
+import { v4 as uuidv4 } from "uuid";
 
 const App = () => {
   const [pins, setPins] = React.useState([]);
@@ -16,14 +18,16 @@ const App = () => {
   const [newPin, setNewPin] = React.useState({
     Id: "",
     Comments: [],
-    Description: "",
+    Description: "Enter Description",
     Location: {
-      lat: 0,
-      lng: 0
+      Latitude: 0,
+      Longitude: 0
     },
-    Title: "",
+    Title: "Enter Title",
   });
   const [newPinOpen, setNewPinOpen] = React.useState(false);
+  const [newCommentOpen, setNewCommentOpen] = React.useState(false);
+  const [newComment, setNewComment] = React.useState("");
 
   useEffect(() => {
     API.get("pinsapi", "/pins/Id")
@@ -55,9 +59,32 @@ const App = () => {
 
   const getCurrentCenter = (map) => {
     const newPinCopy = newPin;
-    newPinCopy.Location = map.getCenter();
-    console.log(`parent newPinCopy ${newPinCopy.Location}`);
+    newPinCopy.Location.Latitude = map.getCenter().lat;
+    newPinCopy.Location.Longitude = map.getCenter().lng;
     setNewPin(newPinCopy);
+  };
+
+  const postNewPin = (newPin, pins) => {
+    const uuid = uuidv4();
+    newPin.Id = uuid;
+    const pinsCopy = pins.concat(newPin);
+    setPins(pinsCopy);
+    API.post("pinsapi", "/pins", {
+      body: newPin
+    }).then(res => {
+      console.log(res);
+      if (res.success){
+        console.log("successful now lets add");
+      }
+    });
+  };
+
+  const putNewComment = (selectedPin) => {
+    API.put("pinsapi", "/pins", {
+      body: selectedPin
+    }).then(res => {
+      console.log(res);
+    });
   };
 
   return (
@@ -67,9 +94,12 @@ const App = () => {
         setDraggable={setDraggable}
         newPinOpen={newPinOpen}
         setNewPinOpen={setNewPinOpen}
+        newPin={newPin}
+        setCenterPos={() => {getCurrentCenter(map);}}
+
       />
       <MapContainer
-        center={[0, 0]}
+        center={[50, 0]}
         zoom={2.5}
         ref={setMap}
       >
@@ -97,7 +127,6 @@ const App = () => {
             <>
               <Draggable
                 draggable={draggable} 
-                setCenterPos={() => {getCurrentCenter(map);}}
                 setNewPin={setNewPin}
                 newPin={newPin}
               />
@@ -110,18 +139,38 @@ const App = () => {
         open={detailOpen}
         currentPin={currentPin}
         onClick={() => {conditionalClose(open);}}
+        setNewCommentOpen={setNewCommentOpen}
+        newCommentOpen={newCommentOpen}
       />
       {
         newPinOpen && draggable
           ?
           <NewPinDisplay 
             open={newPinOpen}
-            setNewPinOpen={() => {setNewPinOpen(!newPinOpen);}}
+            newPin={newPin}
+            pins={pins}
+            setNewPinOpen={setNewPinOpen}
+            setNewPin={setNewPin}
+            postNewPin={postNewPin}
+            setDraggable={setDraggable}
           />
           :
           null
       }
-      
+      {
+        newCommentOpen
+          ?
+          <NewCommentDisplay 
+            currentPin={currentPin}
+            setNewCommentOpen={setNewCommentOpen}
+            newCommentOpen={newCommentOpen}
+            newComment={newComment}
+            setNewComment={setNewComment}
+            putNewComment={putNewComment}
+          />
+          :
+          null
+      }
       
     </>
   );
